@@ -1,0 +1,155 @@
+@charset "utf-8";
+
+body {
+  font-family: "ヒラギノ丸ゴ Pro W4", "ヒラギノ丸ゴ Pro", "Hiragino Maru Gothic Pro", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "HG丸ｺﾞｼｯｸM-PRO", "HGMaruGothicMPRO";
+  font-weight: 600;
+  color: #4a5561;
+}
+
+#app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+input:focus {
+  outline: none;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 5px;
+}
+
+.main-header {
+  flex-shrink: 0;
+  height: 90px;
+  width: 100%;
+  background-color: #4CA0C4;
+}
+
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  height: 100%;
+  margin: auto;
+}
+
+.menu-area,
+.stamp-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.stamp-area {
+  justify-content: flex-end;
+}
+
+.hamburger-icon {
+  width: 50px;
+}
+
+.stamp-icon {
+  width: 90px;
+}
+
+.app-title {
+  flex: 2;
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #FFF;
+  letter-spacing: 0.075em;
+  white-space: nowrap;
+}
+
+.main-content {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  flex-grow: 1;
+  background-image: url("../images/backMoon.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  box-sizing: border-box;
+}
+
+
+.main-footer {
+  flex-shrink: 0;
+  height: 90px;
+  position: relative;
+  /* 子要素の absolute の基準点にする */
+  display: flex;
+  justify-content: center;
+  /* コピーライトを中央に */
+  align-items: flex-end;
+  /* 下側に揃える */
+  background-color: #4CA0C4;
+  padding-bottom: 10px;
+  /* 下端の余白 */
+  box-sizing: border-box;
+}
+
+.ticket-check-area {
+  position: absolute;
+  right: 30px;
+  /* 右端からの距離 */
+  top: 50%;
+  transform: translateY(-50%);
+  /* 縦方向の中央寄せ */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  /* テキストを右揃えに */
+  gap: 8px;
+  /* チケット同士の行間 */
+}
+
+.ticket-container {
+  color: #FFFFFF;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.ticket-count {
+  display: inline-block;
+  width: 1.5em;
+  /* 数字部分の幅を固定すると揃いやすい */
+  text-align: right;
+  font-weight: bold;
+}
+
+.copyright {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8rem;
+}
+
+/*ポップアップ*/
+#flash-message-container:not(:has(div)) {
+    display: none; /* 中身が空（スペースすら無い状態）のときだけ完全に存在を消す */
+}
+
+.alert-success {
+  position: fixed; /* 画面上部に固定 */
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  width: 250px;
+  height: 100px;
+
+  padding: 15px 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+  /* 文字を中央寄せ */
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  text-align: center;
+}
