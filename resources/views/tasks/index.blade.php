@@ -76,8 +76,8 @@
         <button type="button" class="btn-primary task-create-btn">タスクを登録する</button>
       </div>
       @else
-      <div class="use-change-ticket">
-        <button type="button" class="btn-primary change-ticket-btn">タスクを変更する</button>
+      <div class="use-edit-tickets">
+        <button type="button" class="btn-primary edit-tickets-btn">タスクを変更する</button>
       </div>
       @endif
     @elseif (\Carbon\Carbon::parse($displayDate)->lt(today()))
@@ -99,6 +99,10 @@
    
    <div id="edit-task-modal" class="modal-overlay">
     @include('tasks._edit_modal', ['tasks' => $tasks, 'displayDate' => $displayDate])
+   </div>
+
+   <div id="edit-tickets-modal" class="modal-overlay">
+    @include('tasks._edit_tickets_modal', ['tasks' => $tasks, 'displayDate' => $displayDate, 'editTickets' => $editTickets])
    </div>
 
 </div>

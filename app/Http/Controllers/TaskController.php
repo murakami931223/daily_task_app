@@ -26,6 +26,10 @@ class TaskController extends Controller
         //ログインユーザー取得
         $user = User::findByToken($request);
 
+        //編集チケット数取得
+        $userStats = $user->userStat;
+        $editTickets = $userStats ? $userStats->edit_tickets : 0;
+
         //表示中の日のタスクを全て取得
         $tasks = Task::where('user_id', $user->id)
                         ->whereDate('task_date', $targetDate)
@@ -65,7 +69,7 @@ class TaskController extends Controller
         }
 
                         
-        return view('tasks.index', compact('tasks', 'displayDate', 'prevDate', 'nextDate', 'rate'));
+        return view('tasks.index', compact('tasks', 'displayDate', 'prevDate', 'nextDate', 'rate', 'editTickets'));
     }
 
     //チェックボックスへのチェックによる達成率変動

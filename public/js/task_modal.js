@@ -15,74 +15,10 @@ $(function () {
       });
     }
 
-  //タスク登録画面表示
-  function addTask() {
-    $(document).on('click', '.task-create-btn, #close-add-modal, #add-task-modal', function (e) {
-
-      //送信ボタンが押されたときはそのまま送信させる
-      if ($(e.target).closest('button[type="submit"]').length) {
-        return; 
-      }
-      //送信ボタン以外なら、htmlの標準動作を止める
-      e.preventDefault();
-
-      //クリックされた瞬間にモーダルを探す
-      const addTaskModal = document.getElementById('add-task-modal');
-      if (!addTaskModal) return;
-
-      //クリックされたのが「登録ボタン」ならモーダル表示
-      if ($(this).hasClass('task-create-btn')) {
-        addTaskModal.classList.add('is-open');
-      }
-      //キャンセルボタン、または欄外が押されたら閉じる
-      else if ($(this).is('#close-add-modal') || e.target === addTaskModal) {
-        //まず非表示にする
-        addTaskModal.classList.remove('is-open');
-
-        //3秒後に中身をリセットする
-        setTimeout(function() {
-          //2行目以降（最初の行以外）をすべて削除
-          $('#input-container .input-row').not(':first').remove();
-          //残った1行目を取得
-          const $FirstRow = $('#input-container .input-row').first();
-  
-          //1行目の中身をリセット
-          $FirstRow.find('input[type="text"]').val('');
-          $FirstRow.find('.priority-select').val('2').removeClass('p-1 p-3').addClass('p-2');
-        }, 300);
-
-      }
-    });
-  }
-
-  //タスク編集画面表示
-  function editTask() {
-    $(document).on('click', '.task-edit-btn, #close-edit-modal, #edit-task-modal', function (e) {
-      //送信ボタンが押されたときはそのまま送信させる
-      if ($(e.target).closest('button[type="submit"]').length) {
-        return; 
-      }
-      //送信ボタン以外なら、htmlの標準動作を止める
-      e.preventDefault();
-
-      const editTaskModal = document.getElementById('edit-task-modal');
-      if (!editTaskModal) return;
-
-      //クリックされたのが「編集ボタン」ならモーダル表示
-      if ($(this).hasClass('task-edit-btn')) {
-        editTaskModal.classList.add('is-open');
-      }
-      //キャンセルボタン、または欄外が押されたら閉じる
-      else if ($(this).is('#close-edit-modal') || e.target === editTaskModal) {
-        //まず非表示にする
-        editTaskModal.classList.remove('is-open');
-      }
-    });
-  }
-
   function manageTaskModal() {
     //登録ボタンや編集ボタン、閉じるボタン、モーダル背景を一括監視
-    $(document).on('click', '.task-create-btn, .task-edit-btn, #close-add-modal, #close-edit-modal, #add-task-modal, #edit-task-modal', function(e) {
+    $(document).on('click', 
+      '.task-create-btn, .task-edit-btn, .edit-tickets-btn, #close-add-modal, #close-edit-modal, #close-tickets-modal, #add-task-modal, #edit-task-modal, #edit-tickets-modal', function(e) {
      
       //送信ボタンなら何もしない
       if ($(e.target).closest('button[type="submit"]').length) return;
@@ -96,16 +32,25 @@ $(function () {
         targetModalId = 'add-task-modal';
       }else if ($(this).hasClass('task-edit-btn') || $(this).is('#edit-task-modal, #close-edit-modal')) {
         targetModalId = 'edit-task-modal';
+      }else if ($(this).hasClass('edit-tickets-btn') || $(this).is('#edit-tickets-modal, #close-tickets-modal')) {
+        targetModalId = 'edit-tickets-modal';
       }
 
       const $modal = $('#' + targetModalId);
       if (!$modal.length) return;
 
       //表示・非表示の切り替え
-      if ($(this).hasClass('task-create-btn') || $(this).hasClass('task-edit-btn')) {
+      if ($(this).hasClass('task-create-btn') || $(this).hasClass('task-edit-btn') || $(this).hasClass('edit-tickets-btn')) {
         //開く処理
         $modal.addClass('is-open');
-      } else if ($(this).is('#close-add-modal, #close-edit-modal') || e.target.id === targetModalId) {
+
+        //「タスクを変更する」ボタンの時、「はい」を押したらis-openクラスを削除
+        if ($(this).hasClass('edit-tickets-btn')) {
+          if($(this).hasClass('task-edit-btn')) {
+            $modal.removeClass('is-open');
+          }
+        }
+      } else if ($(this).is('#close-add-modal, #close-edit-modal, #close-tickets-modal') || e.target.id === targetModalId) {
         //閉じる処理
         $modal.removeClass('is-open');
 
@@ -161,7 +106,5 @@ $(function () {
   //実行
   initPriorityColor()
   addInput()
-  // addTask()
-  // editTask()
   manageTaskModal()
 });
