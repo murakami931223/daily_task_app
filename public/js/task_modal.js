@@ -18,7 +18,7 @@ $(function () {
   function manageTaskModal() {
     //登録ボタンや編集ボタン、閉じるボタン、モーダル背景を一括監視
     $(document).on('click', 
-      '.task-create-btn, .task-edit-btn, .edit-tickets-btn, #close-add-modal, #close-edit-modal, #close-tickets-modal, #add-task-modal, #edit-task-modal, #edit-tickets-modal', function(e) {
+      '.task-create-btn, .task-edit-btn, .edit-tickets-btn, .confirm-yes-btn, #close-add-modal, #close-edit-modal, #close-tickets-modal, #add-task-modal, #edit-task-modal, #edit-tickets-modal', function(e) {
      
       //送信ボタンなら何もしない
       if ($(e.target).closest('button[type="submit"]').length) return;
@@ -32,7 +32,7 @@ $(function () {
         targetModalId = 'add-task-modal';
       }else if ($(this).hasClass('task-edit-btn') || $(this).is('#edit-task-modal, #close-edit-modal')) {
         targetModalId = 'edit-task-modal';
-      }else if ($(this).hasClass('edit-tickets-btn') || $(this).is('#edit-tickets-modal, #close-tickets-modal')) {
+      }else if ($(this).hasClass('edit-tickets-btn') || $(this).hasClass('confirm-yes-btn') || $(this).is('#edit-tickets-modal, #close-tickets-modal')) {
         targetModalId = 'edit-tickets-modal';
       }
 
@@ -44,13 +44,11 @@ $(function () {
         //開く処理
         $modal.addClass('is-open');
 
-        //「タスクを変更する」ボタンの時、「はい」を押したらis-openクラスを削除
-        if ($(this).hasClass('edit-tickets-btn')) {
-          if($(this).hasClass('task-edit-btn')) {
-            $modal.removeClass('is-open');
-          }
-        }
-      } else if ($(this).is('#close-add-modal, #close-edit-modal, #close-tickets-modal') || e.target.id === targetModalId) {
+      } else if ($(this).hasClass('confirm-yes-btn')) {
+      $modal.removeClass('is-open');        // まずチケット確認画面を閉じる
+      $('#edit-task-modal').addClass('is-open'); // 次に編集モーダルを開く
+
+      }else if ($(this).is('#close-add-modal, #close-edit-modal, #close-tickets-modal') || e.target.id === targetModalId) {
         //閉じる処理
         $modal.removeClass('is-open');
 

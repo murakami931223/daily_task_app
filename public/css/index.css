@@ -229,3 +229,8 @@ input[type="checkbox"] {
   background-color: #E66A6C;
   color: #FFF;
 }
+
+.edit-tickets-btn {
+  background-color: #EE984E;
+  color: #FFF;
+}

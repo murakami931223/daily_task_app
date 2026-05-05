@@ -36,6 +36,31 @@
   transition: transform 0.3s ease;
 }
 
+.tickets-modal {
+  width: 40%;
+  height: 30%;
+}
+
+.text-center {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-tickets-area p {
+  margin-bottom: 1.2rem;
+}
+
+.tickets-text {
+  font-size: 1.2rem;
+}
+
+.tickets-annotation {
+  font-size: 0.9rem;
+}
+
 .modal-overlay.is-open .modal-content {
   transform: translateY(0);
 }
@@ -179,7 +204,8 @@
 }
 
 .modal-create-btn,
-.master-create-btn {
+.master-create-btn,
+.confirm-yes-btn {
   background-color: #E66A6C;
   color: #FFF;
   font-size: 1.5rem;

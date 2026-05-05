@@ -58,7 +58,7 @@
                 </div>
                 
                 <div class="ticket-container">
-                    <span class="change-ticket">変更チケット×</span>
+                    <span class="edit-ticket">編集チケット×</span>
                     <span class="ticket-count">{{ $currentUser->userStat->edit_tickets }}</span>
                 </div>
             </div>

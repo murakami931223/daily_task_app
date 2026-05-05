@@ -102,7 +102,7 @@
    </div>
 
    <div id="edit-tickets-modal" class="modal-overlay">
-    @include('tasks._edit_tickets_modal', ['tasks' => $tasks, 'displayDate' => $displayDate, 'editTickets' => $editTickets])
+    @include('tasks._edit_tickets_modal', ['editTickets' => $editTickets])
    </div>
 
 </div>

@@ -135,9 +135,28 @@ class TaskController extends Controller
         //編集ボタンを押した段階で、画面に残されているIDのリストを取得
         $remainingIds = $request->input('task_ids', []);
 
+        //今日の日付か判定
+        $today = now()->toDateString();
+        $isToday = ($targetDate === $today);
+
+        //編集チケットを減らす用にuserStatを引っ張ってくる
+        $userStats = $user->userStat;
+        //編集チケットを持っているかの確認用
+        $hasTickets = $userStats && $userStats->edit_tickets > 0;
+
     try {
             // トランザクション開始
             DB::beginTransaction();
+
+            //当日、かつチケットがある場合
+            if ($isToday) {
+                if (!$hasTickets) {
+                    throw new \Exception('チケットが足りません');
+                }
+                //ここで編集チケットを1減らす
+                $userStats->decrement('edit_tickets');
+            }
+            
             //画面から消されたタスクをDBから削除
             Task::where('user_id', $user->id)
                 ->whereDate('task_date', $targetDate)
