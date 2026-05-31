@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_stats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->decimal('current_stamp_gauge',2,1)->default(0);
             $table->integer('perfect_stamp_count')->default(0);
             $table->integer('reward_tickets')->default(0);

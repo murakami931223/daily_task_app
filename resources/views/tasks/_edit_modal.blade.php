@@ -33,7 +33,7 @@
     </div>
 
     <div class="modal-btn">
-      <button type="button" id="close-edit-modal" class="modal-btn-primary modal-cancel-btn">キャンセル</button>
+      <button type="button" id="close-edit-modal" class="modal-btn-primary modal-cancel-btn" data-close="edit-task-modal">キャンセル</button>
       <button type="submit" class="modal-btn-primary modal-edit-btn">更新</button>
     </div>
   </form>

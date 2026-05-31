@@ -40,7 +40,7 @@
                 </div>
                 <a href="{{ route('tasks.index') }}"><div class="app-title">Mission Days</div></a>
                 <div class="stamp-area">
-                    <a class="stamp-btn" href="#"><img class="stamp-icon" src="{{ asset('images/stampcard.png') }}" alt="スタンプカードアイコン"></a>
+                    <img class="stamp-icon" src="{{ asset('images/stamp_' . $stampCount . '.png') }}" alt="スタンプカード">
                 </div>
             </div>
         </header>

@@ -19,7 +19,7 @@
   </div>
 
   <div class="modal-btn">
-    <button type="button" id="close-tickets-modal" class="modal-btn-primary modal-cancel-btn">いいえ</button>
+    <button type="button" id="close-tickets-modal" class="modal-btn-primary modal-cancel-btn" data-close="edit-tickets-modal">いいえ</button>
     <button type="button" class="modal-btn-primary confirm-yes-btn">はい</button>
   </div>
   @endif

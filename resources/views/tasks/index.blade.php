@@ -73,35 +73,35 @@
     @if (now()->format('Y/m/d') == $displayDate)
       @if ($tasks -> whereNull('master_id') -> isEmpty())
       <div class="task-create-area">
-        <button type="button" class="btn-primary task-create-btn">タスクを登録する</button>
+        <button type="button" class="btn-primary task-create-btn" data-open="add-task-modal">タスクを登録する</button>
       </div>
       @else
       <div class="use-edit-tickets">
-        <button type="button" class="btn-primary edit-tickets-btn">タスクを変更する</button>
+        <button type="button" class="btn-primary edit-tickets-btn" data-open="edit-tickets-modal">タスクを変更する</button>
       </div>
       @endif
     @elseif (\Carbon\Carbon::parse($displayDate)->lt(today()))
     <div class="btn-primary placeholder" style="visibility: hidden;"></div>
     @elseif ($tasks -> whereNull('master_id') -> isNotEmpty())
     <div class="task-edit-area">
-      <button type="button" class="btn-primary task-edit-btn">タスクを編集する</button>
+      <button type="button" class="btn-primary task-edit-btn" data-open="edit-task-modal">タスクを編集する</button>
     </div>
     @else
     <div class="task-create-area">
-      <button type="button" class="btn-primary task-create-btn">タスクを登録する</button>
+      <button type="button" class="btn-primary task-create-btn" data-open="add-task-modal">タスクを登録する</button>
     </div>
     @endif
    </div>
    
-   <div id="add-task-modal" class="modal-overlay">
+   <div id="add-task-modal" class="modal-overlay"  data-close="add-task-modal">
     @include('tasks._create_modal', ['tasks' => $tasks, 'displayDate' => $displayDate])
    </div>
    
-   <div id="edit-task-modal" class="modal-overlay">
+   <div id="edit-task-modal" class="modal-overlay"  data-close="edit-task-modal">
     @include('tasks._edit_modal', ['tasks' => $tasks, 'displayDate' => $displayDate])
    </div>
 
-   <div id="edit-tickets-modal" class="modal-overlay">
+   <div id="edit-tickets-modal" class="modal-overlay"  data-close="edit-tickets-modal">
     @include('tasks._edit_tickets_modal', ['editTickets' => $editTickets])
    </div>
 

@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use App\Models\UserStat;
 use App\Models\Task;
 use App\Models\DailyMasterTask;
+use App\Models\StampHistory;
 
 class User extends Authenticatable
 {
@@ -55,14 +56,19 @@ class User extends Authenticatable
         return $this->hasOne(UserStat::class);
     }
 
-    public function dailyMasterTask()
+    public function dailyMasterTasks()
     {
         return $this->hasMany(DailyMasterTask::class);
     }
 
-    public function task()
+    public function tasks()
     {
         return $this->hasMany(Task::class);
+    }
+
+        public function stampHistories()
+    {
+        return $this->hasMany(StampHistory::class);
     }
 
     //ログインユーザー取得のための専用メソッド

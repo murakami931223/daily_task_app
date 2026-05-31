@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\DailyMasterTask;
+use App\Models\StampHistory;
 use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
@@ -35,6 +36,9 @@ class TaskController extends Controller
                         ->whereDate('task_date', $targetDate)
                         ->orderBy('priority', 'asc')
                         ->get();
+
+        //獲得スタンプ数を表示
+        $stampCount = $userStats ? $userStats->perfect_stamp_count : 0;
 
         //登録している日課タスクを全て取得
         $masters = DailyMasterTask::where('user_id', $user->id) 
@@ -69,7 +73,7 @@ class TaskController extends Controller
         }
 
                         
-        return view('tasks.index', compact('tasks', 'displayDate', 'prevDate', 'nextDate', 'rate', 'editTickets'));
+        return view('tasks.index', compact('tasks', 'displayDate', 'prevDate', 'nextDate', 'rate', 'editTickets', 'stampCount'));
     }
 
     //チェックボックスへのチェックによる達成率変動
