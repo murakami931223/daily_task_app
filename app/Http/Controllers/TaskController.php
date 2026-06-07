@@ -72,8 +72,12 @@ class TaskController extends Controller
             }
         }
 
+        //未読スタンプを取得
+        $unreadStamps = StampHistory::where('user_id',$user->id)
+                                ->where('is_read', false)
+                                ->count();
                         
-        return view('tasks.index', compact('tasks', 'displayDate', 'prevDate', 'nextDate', 'rate', 'editTickets', 'stampCount'));
+        return view('tasks.index', compact('tasks', 'displayDate', 'prevDate', 'nextDate', 'rate', 'editTickets', 'stampCount', 'unreadStamps'));
     }
 
     //チェックボックスへのチェックによる達成率変動

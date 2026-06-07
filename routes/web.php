@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\StampController;
 use App\Models\User;
 
 
@@ -29,6 +30,8 @@ Route::middleware(['check.user'])->group(function () {
     Route::post('/master_tasks', [TaskController::class, 'masterTaskStore'])->name('tasks.master_task.store');
     //日課タスク削除
     Route::delete('/master_tasks/{id}', [TaskController::class, 'masterTaskDelete'])->name('tasks.master_task.delete');
+    //スタンプ獲得
+    Route::post('/stamp/confirm', [StampController::class, 'confirmStamp'])->name('stamp.confirm');
 });
 
 //トップ画面の条件分岐（初めてのユーザーなら新規登録画面に遷移させる）

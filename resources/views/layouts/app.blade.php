@@ -40,8 +40,12 @@
                 </div>
                 <a href="{{ route('tasks.index') }}"><div class="app-title">Mission Days</div></a>
                 <div class="stamp-area">
-                    <img class="stamp-icon" src="{{ asset('images/stamp_' . $stampCount . '.png') }}" alt="スタンプカード">
+                    <img class="stamp-icon" src="{{ asset('images/stamp_' . $stampCount . '.png') }}" alt="スタンプカード"  data-open="stamp-card-modal">
                 </div>
+            </div>
+
+            <div id="stamp-card-modal" class="modal-overlay"  data-close="stamp-card-modal">
+                @include('tasks._stamp_card_modal', ['stampCount' => $stampCount])
             </div>
         </header>
 
