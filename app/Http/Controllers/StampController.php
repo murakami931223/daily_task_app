@@ -20,13 +20,24 @@ class StampController extends Controller
                                 ->count();
 
         if ($unreadStamps > 0) {
-            $user->userStat->increment('perfect_stamp_count', $unreadStamps);
+            try {
+                DB::beginTransaction();
 
-            StampHistory::where('user_id', $user->id)
-                        ->where('is_read', false)
-                        ->update(['is_read' => true]);
+                $user->userStat->increment('perfect_stamp_count', $unreadStamps);
+
+                StampHistory::where('user_id', $user->id)
+                            ->where('is_read', false)
+                            ->update(['is_read' => true]);
+
+                DB::commit();
+
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return response()->json(['success' => false], 500);
+            }
         }
 
         return response()->json(['success' => true]);
+        
     }
 }
