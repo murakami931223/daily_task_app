@@ -282,13 +282,18 @@
 /*ごほうびチケット獲得のcss*/
 /* スタンプカード全体が光りながらフェードアウト */
 .card-fadeout {
-    animation: cardFadeout 0.8s ease-in forwards;
+    animation: cardFadeout 1s linear forwards;
 }
 
 @keyframes cardFadeout {
-    0%   { opacity: 1; filter: brightness(1); }
-    50%  { opacity: 0.8; filter: brightness(2); }
-    100% { opacity: 0; filter: brightness(3); }
+    0%   { opacity: 1; filter: brightness(1); box-shadow: none; }
+    30%  { opacity: 1; filter: brightness(1.5) sepia(0.6) saturate(3);
+           box-shadow: 0 0 20px 8px rgb(255, 251, 231), 0 0 40px 16px rgba(255, 251, 231, 0.5); }
+    60%  { opacity: 1; filter: brightness(2.5) sepia(0.6) saturate(3);
+           box-shadow: 0 0 40px 16px rgb(255, 251, 231), 0 0 60px 32px rgba(255, 251, 231, 0.7); }
+    80%  { opacity: 0.8; filter: brightness(3) sepia(0.6) saturate(2);
+           box-shadow: 0 0 20px 8px rgb(255, 251, 231), 0 0 40px 16px rgba(255, 251, 231, 0.8); }
+    100% { opacity: 0; filter: brightness(1); box-shadow: none; }
 }
 
 /* チケット画像 */
